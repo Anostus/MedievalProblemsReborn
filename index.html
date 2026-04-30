@@ -1384,6 +1384,60 @@
       }
     }
 
+
+    .castle-image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      padding: max(10px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
+      background: rgba(24, 14, 4, 0.58);
+      backdrop-filter: blur(8px);
+    }
+
+    .castle-image-modal.hidden {
+      display: none !important;
+    }
+
+    .castle-image-modal-card {
+      width: min(96vw, 820px);
+      max-height: calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      background: var(--panel-2);
+      border-radius: 18px;
+      border: 1px solid rgba(90, 65, 33, 0.16);
+      box-shadow: 0 24px 70px rgba(24, 14, 4, 0.38);
+      overflow: hidden;
+    }
+
+    .castle-image-modal-body {
+      min-height: 0;
+      padding: 10px;
+      display: grid;
+      place-items: center;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      background: linear-gradient(180deg, #f7f6f1 0%, #ede8de 100%);
+    }
+
+    .castle-image-modal-body img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: calc(100dvh - 96px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      object-fit: contain;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f7f6f1 0%, #ede8de 100%);
+    }
+
+    body.mobile-browser-fit .castle-image-wrap img {
+      cursor: zoom-in;
+      touch-action: manipulation;
+    }
+
   </style>
 </head>
 <body>
@@ -1572,6 +1626,22 @@
         </div>
       </div>
     </div>
+
+    <div id="castleImageModal" class="castle-image-modal hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="castleImageModalTitle">
+      <div class="castle-image-modal-card">
+        <div class="history-head">
+          <div>
+            <div class="panel-title" id="castleImageModalTitle" style="margin-bottom:2px;">Castle View</div>
+            <div class="small-note">Tap outside the image or use Close to return to the game.</div>
+          </div>
+          <button id="closeCastleImageBtn" class="btn-secondary">Close</button>
+        </div>
+        <div class="castle-image-modal-body">
+          <img id="castleImageModalImg" alt="Expanded castle view of the kingdom" />
+        </div>
+      </div>
+    </div>
+
 
     <footer class="footer-bar">
       <div class="footer-inner">
@@ -2861,7 +2931,26 @@ Rules for stat changes:
     }
 
     function applyMobileFitMode() {
-      document.body.classList.toggle('mobile-browser-fit', isMobileBrowser());
+      const mobile = isMobileBrowser();
+      document.body.classList.toggle('mobile-browser-fit', mobile);
+      if (!mobile) closeCastleImageModal();
+    }
+
+    function openCastleImageModal() {
+      if (!document.body.classList.contains('mobile-browser-fit')) return;
+      const modal = qs('#castleImageModal');
+      const modalImg = qs('#castleImageModalImg');
+      if (!modal || !modalImg) return;
+      modalImg.src = castleImage.src || state.currentImage || INITIAL_CASTLE_DATA_URI;
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeCastleImageModal() {
+      const modal = qs('#castleImageModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
     }
 
     function wireEvents() {
@@ -2871,6 +2960,11 @@ Rules for stat changes:
       qs('#closeHistoryBtn').addEventListener('click', closeHistoryModal);
       qs('#historyModal').addEventListener('click', (e) => {
         if (e.target.id === 'historyModal') closeHistoryModal();
+      });
+      castleImage.addEventListener('click', openCastleImageModal);
+      qs('#closeCastleImageBtn').addEventListener('click', closeCastleImageModal);
+      qs('#castleImageModal').addEventListener('click', (e) => {
+        if (e.target.id === 'castleImageModal') closeCastleImageModal();
       });
       qs('#closeApiHelpBtn').addEventListener('click', closeApiHelpModal);
       qs('#openSettingsFromApiHelpBtn').addEventListener('click', () => {
@@ -2884,6 +2978,7 @@ Rules for stat changes:
         if (e.key === 'Escape') {
           closeHistoryModal();
           closeApiHelpModal();
+          closeCastleImageModal();
         }
       });
       qs('#submitActionBtn').addEventListener('click', onSubmitAction);
