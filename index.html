@@ -1052,6 +1052,325 @@
       }
     }
 
+
+    /* Mobile browser fit mode is enabled only by JS-detected mobile browsers.
+       It keeps the play surface inside one viewport and moves overflow into
+       the relevant text/history areas, leaving desktop layout untouched. */
+    body.mobile-browser-fit {
+      height: 100dvh;
+      min-height: 100dvh;
+      overflow: hidden;
+    }
+
+    body.mobile-browser-fit .app-shell {
+      height: 100dvh;
+      min-height: 0;
+      overflow: hidden;
+      grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+    }
+
+    body.mobile-browser-fit .topbar {
+      padding: max(5px, env(safe-area-inset-top)) 8px 6px;
+    }
+
+    body.mobile-browser-fit .title-row {
+      gap: 6px;
+      align-items: center;
+    }
+
+    body.mobile-browser-fit .logo-wrap {
+      gap: 6px;
+      min-width: 112px;
+      flex: 1 1 116px;
+    }
+
+    body.mobile-browser-fit .crown {
+      font-size: 22px;
+    }
+
+    body.mobile-browser-fit h1 {
+      font-size: clamp(17px, 5vw, 24px);
+      line-height: .9;
+    }
+
+    body.mobile-browser-fit .subtitle {
+      display: none;
+    }
+
+    body.mobile-browser-fit .top-actions {
+      gap: 4px;
+      justify-content: flex-end;
+      flex: 1 1 188px;
+    }
+
+    body.mobile-browser-fit button,
+    body.mobile-browser-fit .button-like {
+      padding: 6px 8px;
+      border-radius: 9px;
+      font-size: 10px;
+      letter-spacing: .03em;
+    }
+
+    body.mobile-browser-fit .settings.open {
+      position: fixed;
+      top: calc(env(safe-area-inset-top) + 58px);
+      left: 8px;
+      right: 8px;
+      z-index: 60;
+      max-height: calc(100dvh - 72px - env(safe-area-inset-top));
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 18px 44px rgba(38, 19, 4, .22);
+      padding: 10px;
+    }
+
+    body.mobile-browser-fit .settings-grid {
+      gap: 8px;
+    }
+
+    body.mobile-browser-fit .field input,
+    body.mobile-browser-fit .field select,
+    body.mobile-browser-fit .field textarea {
+      padding: 9px 10px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    body.mobile-browser-fit .field label {
+      font-size: 10px;
+    }
+
+    body.mobile-browser-fit .stats-strip {
+      padding: 4px 6px;
+    }
+
+    body.mobile-browser-fit .stats-inner {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+    }
+
+    body.mobile-browser-fit .stat-card {
+      min-width: 0;
+      padding: 4px 3px;
+      border-radius: 10px;
+    }
+
+    body.mobile-browser-fit .stat-value {
+      font-size: clamp(16px, 5vw, 21px);
+    }
+
+    body.mobile-browser-fit .stat-label {
+      font-size: 8px;
+      letter-spacing: .03em;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    body.mobile-browser-fit .bar {
+      display: none;
+    }
+
+    body.mobile-browser-fit .content {
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      padding: 6px 6px max(6px, env(safe-area-inset-bottom));
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(86px, 23dvh) minmax(0, 1fr);
+      gap: 6px;
+      align-items: stretch;
+    }
+
+    body.mobile-browser-fit .castle-card {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      border-radius: 14px;
+    }
+
+    body.mobile-browser-fit .castle-header {
+      padding: 5px 8px;
+    }
+
+    body.mobile-browser-fit .panel-title {
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
+
+    body.mobile-browser-fit #phaseLabel {
+      font-size: 12px;
+    }
+
+    body.mobile-browser-fit .castle-image-wrap {
+      min-height: 0;
+      aspect-ratio: auto;
+      padding: 4px;
+      overflow: hidden;
+    }
+
+    body.mobile-browser-fit .castle-image-wrap img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    body.mobile-browser-fit .castle-footer {
+      display: none;
+    }
+
+    body.mobile-browser-fit .content > section:nth-child(2) {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    body.mobile-browser-fit .panel-card {
+      min-height: 0;
+      overflow: hidden;
+      padding: 10px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.mobile-browser-fit .episode-title {
+      font-size: clamp(18px, 5.2vw, 22px);
+      margin-bottom: 5px;
+    }
+
+    body.mobile-browser-fit .episode-text,
+    body.mobile-browser-fit .result-text {
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    body.mobile-browser-fit .episode-text {
+      max-height: 17dvh;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 3px;
+    }
+
+    body.mobile-browser-fit .prompt-box {
+      margin-top: 8px;
+      border-width: 3px;
+      border-radius: 13px;
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.mobile-browser-fit .prompt-top {
+      padding: 8px 10px 5px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      flex: 0 1 auto;
+      max-height: 38%;
+    }
+
+    body.mobile-browser-fit .prompt-bottom {
+      padding: 8px 10px 9px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    body.mobile-browser-fit #inputArea {
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.mobile-browser-fit #inputArea .field {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    body.mobile-browser-fit #actionInput {
+      flex: 1 1 auto;
+      min-height: 92px;
+      max-height: none;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    body.mobile-browser-fit .action-row {
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    body.mobile-browser-fit .delta-row {
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    body.mobile-browser-fit .delta-chip {
+      padding: 5px 7px;
+      font-size: 10px;
+    }
+
+    body.mobile-browser-fit .history-launch {
+      margin-top: 0;
+    }
+
+    body.mobile-browser-fit .footer-bar {
+      position: static;
+      padding: 4px 8px max(4px, env(safe-area-inset-bottom));
+    }
+
+    body.mobile-browser-fit .footer-inner {
+      font-size: 10px;
+    }
+
+    body.mobile-browser-fit .footer-inner .small-note {
+      display: none;
+    }
+
+    body.mobile-browser-fit .history-modal,
+    body.mobile-browser-fit .api-help-modal {
+      padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom));
+    }
+
+    body.mobile-browser-fit .history-modal-card,
+    body.mobile-browser-fit .api-help-card {
+      width: calc(100vw - 16px);
+      max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      border-radius: 16px;
+    }
+
+    body.mobile-browser-fit .history-head {
+      padding: 8px 10px;
+    }
+
+    body.mobile-browser-fit .history-modal-card .history-list {
+      overflow: auto !important;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-height: 700px) {
+      body.mobile-browser-fit .content {
+        grid-template-rows: minmax(68px, 18dvh) minmax(0, 1fr);
+      }
+
+      body.mobile-browser-fit .episode-text {
+        max-height: 12dvh;
+      }
+
+      body.mobile-browser-fit #actionInput {
+        min-height: 70px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1206,9 +1525,6 @@
             <div class="small-note">Your previous rulings and their consequences.</div>
           </div>
           <div class="top-actions" style="gap:8px;">
-            <button id="saveBrowserBtn" class="btn-secondary">Save</button>
-            <button id="loadBrowserBtn" class="btn-secondary">Load</button>
-            <button id="exportStateBtn" class="btn-secondary">Export</button>
             <button id="closeHistoryBtn" class="btn-secondary">Close</button>
           </div>
         </div>
@@ -1760,7 +2076,8 @@
       };
     }
 
-    function restoreFromSavePayload(payload) {
+    function restoreFromSavePayload(payload, options = {}) {
+      const { closeModal = true, silent = false, statusMessage = null } = options;
       const game = payload?.game || payload?.state || payload;
       if (!game || typeof game !== 'object') throw new Error('This does not look like a Medieval Problems save file.');
 
@@ -1806,9 +2123,9 @@
       renderEpisode();
       setPhase(state.phase === 'result' ? 'result' : 'episode');
       showImageOverlay(false);
-      closeHistoryModal();
+      if (closeModal) closeHistoryModal();
       imageStatus.textContent = restoredImage ? 'Castle image restored from save.' : 'Castle image reset to the built-in starting image.';
-      setStatus(`Loaded save from month ${state.month}.`, 'status-ok');
+      if (!silent) setStatus(statusMessage || `Loaded save from month ${state.month}.`, 'status-ok');
     }
 
     function exportState() {
@@ -1822,27 +2139,42 @@
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1500);
-      setStatus('Save file exported.', 'status-ok');
+      setStatus('Save file exported as JSON.', 'status-ok');
     }
 
-    function saveGameToBrowser() {
-      // localStorage is often too small for generated base64 images, so browser saves store the game state
-      // and reset the castle to the built-in image on load. Use Export for a full image-inclusive save file.
-      const payload = makeSavePayload(false);
-      localStorage.setItem('medievalProblemsSave', JSON.stringify(payload));
-      setStatus(`Game saved in this browser at month ${state.month}. Use Export for an image-inclusive save file.`, 'status-ok');
+    function saveGameToBrowser(options = {}) {
+      const silent = Boolean(options?.silent);
+      // localStorage is often too small for generated base64 images, so browser auto-saves store the game state
+      // and reset the castle to the built-in image on load. Use Save Game for a full image-inclusive JSON file.
+      try {
+        const payload = makeSavePayload(false);
+        localStorage.setItem('medievalProblemsSave', JSON.stringify(payload));
+        if (!silent) setStatus(`Game saved in this browser at month ${state.month}.`, 'status-ok');
+        return true;
+      } catch (err) {
+        if (!silent) setStatus(`Could not save game in this browser: ${err.message}`, 'status-error');
+        console.warn('Browser save failed:', err);
+        return false;
+      }
     }
 
-    function loadGameFromBrowser() {
+    function loadGameFromBrowser(options = {}) {
+      const silent = Boolean(options?.silent);
       const raw = localStorage.getItem('medievalProblemsSave');
       if (!raw) {
-        setStatus('No browser save found. Use Export/Load Game for save files.', 'status-error');
-        return;
+        if (!silent) setStatus('No browser save found. Use Load Game for JSON save files.', 'status-error');
+        return false;
       }
       try {
-        restoreFromSavePayload(JSON.parse(raw));
+        restoreFromSavePayload(JSON.parse(raw), {
+          closeModal: !silent,
+          silent
+        });
+        return true;
       } catch (err) {
-        setStatus(`Could not load browser save: ${err.message}`, 'status-error');
+        if (!silent) setStatus(`Could not load browser save: ${err.message}`, 'status-error');
+        console.warn('Browser load failed:', err);
+        return false;
       }
     }
 
@@ -2210,6 +2542,7 @@ Rules:
         };
         renderEpisode();
         setPhase('episode');
+        saveGameToBrowser({ silent: true });
         setStatus('A new dilemma has arrived.', 'status-ok');
       } catch (err) {
         handleOpenRouterFailure(err, 'The game could not create the next dilemma.');
@@ -2335,6 +2668,7 @@ Rules for stat changes:
       renderStats();
       renderHistory();
       setPhase('result');
+      saveGameToBrowser({ silent: true });
 
       const mood = Object.entries(state.stats).map(([k,v]) => `${k} is ${v}% (${statTone(v)})`).join('; ');
       const castleVisualContext = resolution.imageStatePrompt || 'modest visible changes matching the kingdom state';
@@ -2504,6 +2838,19 @@ Rules for stat changes:
       qs('#historyModal').classList.add('hidden');
     }
 
+    function isMobileBrowser() {
+      const ua = navigator.userAgent || navigator.vendor || '';
+      const mobileUa = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
+      const iPadTouch = /iPad/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const coarsePointer = window.matchMedia?.('(pointer: coarse)')?.matches ?? false;
+      const compactViewport = Math.min(window.innerWidth || 0, window.innerHeight || 0) <= 900;
+      return mobileUa || (iPadTouch && coarsePointer) || (coarsePointer && compactViewport);
+    }
+
+    function applyMobileFitMode() {
+      document.body.classList.toggle('mobile-browser-fit', isMobileBrowser());
+    }
+
     function wireEvents() {
       qs('#newGameBtn').addEventListener('click', newGame);
       qs('#historyBtn').addEventListener('click', openHistoryModal);
@@ -2534,12 +2881,9 @@ Rules for stat changes:
       qs('#surpriseBtn').addEventListener('click', randomActionSuggestion);
       qs('#toggleSettingsBtn').addEventListener('click', () => settingsPanel.classList.toggle('open'));
       qs('#refreshModelsBtn').addEventListener('click', loadOpenRouterModelsFromButton);
-      qs('#saveGameBtn').addEventListener('click', saveGameToBrowser);
+      qs('#saveGameBtn').addEventListener('click', exportState);
       qs('#loadGameBtn').addEventListener('click', chooseSaveFile);
-      qs('#saveBrowserBtn').addEventListener('click', saveGameToBrowser);
-      qs('#loadBrowserBtn').addEventListener('click', loadGameFromBrowser);
       qs('#loadSaveInput').addEventListener('change', (e) => loadGameFromFile(e.target.files?.[0]));
-      qs('#exportStateBtn').addEventListener('click', exportState);
       [apiKeyInput, kingdomNameInput, rulerNameInput, autoImageCheckbox, imageSizeSelect, savePrefsSelect].forEach(el => {
         el.addEventListener('change', () => { getSettings(); renderStats(); });
       });
@@ -2552,9 +2896,12 @@ Rules for stat changes:
       actionInput.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') onSubmitAction();
       });
+      window.addEventListener('resize', applyMobileFitMode);
+      window.addEventListener('orientationchange', applyMobileFitMode);
     }
 
     async function init() {
+      applyMobileFitMode();
       loadPrefs();
       loadBuiltInModels();
       const settings = getSettings();
@@ -2562,8 +2909,13 @@ Rules for stat changes:
       populateSelect(imageModelSelect, [...DEFAULT_IMAGE_MODELS, settings.imageModel], settings.imageModel);
       castleImage.src = INITIAL_CASTLE_DATA_URI;
       wireEvents();
-      setStatus('Ready. Add an OpenRouter API key in Settings before playing.', 'status-ok');
-      await newGame();
+
+      if (loadGameFromBrowser({ silent: true })) {
+        setStatus(`Loaded browser save from month ${state.month}.`, 'status-ok');
+      } else {
+        setStatus('Ready. Add an OpenRouter API key in Settings before playing.', 'status-ok');
+        await newGame();
+      }
     }
 
     init();
